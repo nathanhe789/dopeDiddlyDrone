@@ -1,3 +1,6 @@
+//Names: Nathan He, Fernando Avila, Carson Chang, Cynthia Martinez
+//CS362 Projects
+
 //set RGB pins
 const int redPin1 = 11;
 const int greenPin1 = 10;
@@ -56,6 +59,7 @@ long microsecondsToInches(long microseconds) { return microseconds / 74 / 2; }
 //helper function to convert duration to inches
 long microsecondsToCentimeters(long microseconds) { return microseconds / 29 / 2; }
 
+//function to get duration
 void getDuration() {
   // Clears the trigPin
   digitalWrite(trigPin, LOW);
@@ -80,6 +84,21 @@ void getDuration() {
 
 }
 
+//function to sense object
+void senseObject() {
+  //long ft = inches / 12;
+  if (cm <= 8) {
+    //set red
+    setColor1(255, 0, 0);
+  }else if(cm > 8 && cm <= 15) {
+    //set orange
+    setColor1(255, 165, 0);
+  } else {
+    setColor1(0, 255, 0);  
+  }
+  
+}
+
 void setup() {
   //Set up serial communication
   Serial.begin(9600);
@@ -99,8 +118,10 @@ void loop() {
   // put your main code here, to run repeatedly:
 
   setColor1(rVal, gVal, bVal);
-  fade1();
+  //fade1();
 
+  senseObject();
+ 
   getDuration();
 
   //delay(100);
